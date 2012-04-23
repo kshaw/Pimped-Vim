@@ -1,32 +1,23 @@
 
-"TODO: comment explaing this, anyone?
 filetype off
 call pathogen#runtime_append_all_bundles() 
-
-"FIXME: why do I have both of these lines? must investigate them:
 syntax on
-syntax enable
-
-"TODO: comment explaining this, anyone?
 filetype plugin indent on
 
-"------------------------------------------------------------------
-"Solarized Colorscheme Config
-"------------------------------------------------------------------
-"set background=light
+" solarized
 set background=dark
 colorscheme solarized
 
-"TODO: don't know what this is actually:
-"au BufNewFile,BufRead *.apk set filetype=apk
+" don't know what this is actually
+au BufNewFile,BufRead *.apk set filetype=apk
 
 "set tabs to 4 spaces.
 set tabstop=4
 set expandtab
 set shiftwidth=4
 
-"ruby and yaml files are indented by two
-autocmd FileType ruby,rdoc,cucumber,yaml set softtabstop=2 tabstop=2 shiftwidth=2
+" ruby and yaml files are indented by two
+autocmd FileType ruby,rdoc,cucumber,php,yaml set softtabstop=2 tabstop=2 shiftwidth=2
 
 "automatically indent
 set smartindent
@@ -47,26 +38,23 @@ set tags=tags;/
 autocmd VimEnter * wincmd p
 ":colorscheme evening
 
-"the so-called 'mandatory option' -- TODO: research and add better comment 
+
+"the so-called 'mandatory option'
 :set hidden
 
 "the sequence `\d` will delete the current buffer without killing the window
 nmap <leader>d :bprevious<CR>:bdelete #<CR>
 
-"NERDTreeIgnore
-let NERDTreeIgnore=[]
-let NERDTreeIgnore+=['.*\~$']
-let NERDTreeIgnore+=['.*\.pyc$']
-
-"setup NERDtree mapping
+let NERDTreeIgnore = ['\.pyc$', '\~$']
 map <F2> :NERDTreeToggle<CR>
 
 "add a shortcut to reindex CommandT's file listing
 map <leader>f :CommandTFlush<CR>
 
-"we are in the future! no need to be compatible with Vi
-set nocompatible
+"open the window larger than normal (100 wide by 40 tall)
+"win 100 40
 
+set nocompatible
 "allow for c,w to change part of a camel-cased word
 "source $HOME/Dropbox/dev/camelcasemotion.vim
 
@@ -85,8 +73,8 @@ nnoremap <C-l> <C-w>l
 noremap <silent> ,a :Ack --follow 
 
 
-"create a shortcut to get out of insert mode by typing 'jj':
-"inoremap jj <ESC>
+" create a shortcut to get out of insert mode by typing 'jj'
+inoremap jj <ESC>
 
 
 "from here down is the default _vimrc
@@ -96,50 +84,16 @@ source $VIMRUNTIME/mswin.vim
 behave mswin
 
 
+map <leader>f :CommandTFlush<CR>
 
     
 
+" turn off the annoying top bar in MacVim
 if has("gui_running")
-  "turn off the right-hand scrollbar in MacVim:
-  set guioptions-=r
-  "turn off the annoying fat top bar in MacVim:
-  set guioptions-=T
+ set guioptions=egmrt
 endif
 
 "give me that nice little gutter so i don't make stuff too wide
 "set formatoptions=qrn1
 "set colorcolumn=80
-
-" this makes MacVim share your Mac keyboard. I don't know the non-MacVim
-" implications.
-set clipboard=unnamed
-
-
-
-" smartcase makes it so:
-"    /copyright      " Case insensitive
-"    /Copyright      " Case sensitive
-"    /copyright\C    " Case sensitive
-"    /Copyright\c    " Case insensitive
-set smartcase
-
-
-"This allows you to hit Escape to unset the 'last search pattern' register 
-nnoremap <esc> :noh<return><esc>
-
-
-" As the cursor moves to the top or bottom, the will start moving 5 lines
-" before the cursor reaches the first/last rendered line.
-set scrolloff=5
-
-" Do some sweet status line magic!
-set statusline=\b%n%m\:\ %f "buffer/filename /modified, e.g. `b3[+]: ~/.vimrc`
-set statusline+=\ (%v\,%l/%L) "column/line/total lines, e.g. `(41,144/145)`
-set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
-
-
-" EasyGrep config
-let g:EasyGrepMode=2 "search only files of current type
-let g:EasyGrepRecursive=1 "default to recursive style search
-let g:EasyGrepReplaceWindowMode=2 "autowrite the files changed by :Replace
 
